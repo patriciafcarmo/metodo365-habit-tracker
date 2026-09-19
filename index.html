@@ -10,190 +10,354 @@
       box-sizing: border-box;
     }
 
+    :root {
+      --verde: #405c35;
+      --verde-medio: #71876a;
+      --verde-claro: #e8eee2;
+      --creme: #f4f0e5;
+      --creme-card: #fbfaf6;
+      --texto: #263124;
+      --texto-suave: #697064;
+
+      --positivo: #5f9b4f;
+      --positivo-bg: #edf4e7;
+
+      --atencao: #d9ad43;
+      --atencao-bg: #faf3dd;
+
+      --negativo: #d66a5e;
+      --negativo-bg: #f8e8e4;
+
+      --neutro: #a5a69b;
+      --neutro-bg: #f0f0eb;
+    }
+
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
-      background: #f4f1e8;
-      color: #30382f;
+      background: #e8e5dc;
+      color: var(--texto);
     }
 
-    .app {
-      max-width: 520px;
+    .phone-app {
+      width: 100%;
+      max-width: 430px;
+      min-height: 100vh;
       margin: 0 auto;
-      padding: 28px 18px 45px;
+      background: var(--creme);
+      position: relative;
+      padding: 22px 16px 105px;
     }
 
-    .header {
-      text-align: center;
-      margin-bottom: 28px;
-    }
+    /* CABEÇALHO */
 
-    .brand {
-      font-size: 30px;
-      font-weight: 700;
-      margin: 0;
-      color: #355a3a;
-    }
-
-    .subtitle {
-      margin: 6px 0 0;
-      font-size: 13px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #798276;
-    }
-
-    .intro {
-      background: #e7eee2;
-      border-radius: 18px;
-      padding: 20px;
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
       margin-bottom: 22px;
     }
 
-    .intro h1 {
-      margin: 0 0 8px;
-      font-size: 26px;
-      color: #2f4d34;
+    .logo-small {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--verde-medio);
+      margin-bottom: -4px;
     }
 
-    .intro p {
-      margin: 0;
-      line-height: 1.5;
-      font-size: 15px;
-      color: #596357;
+    .logo-number {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 48px;
+      line-height: 0.95;
+      font-weight: 400;
+      color: var(--verde);
     }
 
-    .habit-card {
-      background: #ffffff;
-      border-radius: 20px;
-      padding: 20px;
-      margin-bottom: 16px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    .logo-number span {
+      font-size: 23px;
+      vertical-align: top;
+      margin-left: 3px;
     }
 
-    .habit-title {
+    .motto {
+      max-width: 115px;
+      margin-top: 3px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-style: italic;
+      font-size: 14px;
+      line-height: 1.3;
+      color: var(--verde);
+      transform: rotate(-3deg);
+      text-align: right;
+    }
+
+    .date {
+      margin: 0 0 3px;
+      color: var(--texto-suave);
+      font-size: 14px;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 29px;
+      font-weight: 500;
+      color: #283625;
+    }
+
+    /* CARDS */
+
+    .habit {
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(64,92,53,.08);
+      border-radius: 18px;
+      padding: 13px;
+      margin-bottom: 11px;
+      box-shadow: 0 3px 12px rgba(55,70,50,.05);
+    }
+
+    .habit-head {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 11px;
+    }
+
+    .habit-icon {
+      width: 39px;
+      height: 39px;
+      flex: 0 0 39px;
+      border-radius: 50%;
+      background: var(--verde-claro);
       display: flex;
       align-items: center;
-      gap: 9px;
-      margin-bottom: 8px;
-      font-size: 20px;
-      font-weight: 700;
-      color: #355a3a;
+      justify-content: center;
+      font-size: 21px;
     }
 
-    .question {
-      margin: 0 0 16px;
-      font-size: 15px;
-      line-height: 1.45;
-      color: #50594e;
+    .habit-name {
+      margin: 0 0 2px;
+      color: var(--verde);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .8px;
+      text-transform: uppercase;
     }
 
-    .option {
-      display: block;
+    .habit-question {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.25;
+      color: #2d342b;
+    }
+
+    /* RESPOSTAS */
+
+    .answers {
+      display: grid;
+      gap: 5px;
+    }
+
+    .answers.three {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .answers.four {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .answer {
       position: relative;
-      margin-bottom: 9px;
       cursor: pointer;
+      min-width: 0;
     }
 
-    .option:last-child {
-      margin-bottom: 0;
-    }
-
-    .option input {
+    .answer input {
       position: absolute;
       opacity: 0;
       pointer-events: none;
     }
 
-    .option span {
+    .answer-box {
+      height: 82px;
+      padding: 9px 5px 7px;
+      border-radius: 11px;
+      border: 1.5px solid transparent;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: center;
+      font-size: 10px;
+      line-height: 1.15;
+      transition: .15s ease;
+    }
+
+    .dot {
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      margin-bottom: 8px;
+      flex: 0 0 auto;
+    }
+
+    .green {
+      background: var(--positivo-bg);
+    }
+
+    .green .dot {
+      background: var(--positivo);
+    }
+
+    .yellow {
+      background: var(--atencao-bg);
+    }
+
+    .yellow .dot {
+      background: var(--atencao);
+    }
+
+    .red {
+      background: var(--negativo-bg);
+    }
+
+    .red .dot {
+      background: var(--negativo);
+    }
+
+    .neutral {
+      background: var(--neutro-bg);
+    }
+
+    .neutral .dot {
+      background: var(--neutro);
+    }
+
+    .answer input:checked + .answer-box {
+      border-color: var(--verde);
+      box-shadow: 0 0 0 2px rgba(64,92,53,.12);
+      transform: translateY(-1px);
+    }
+
+    .answer input:checked + .answer-box::after {
+      content: "✓";
+      position: absolute;
+      top: 5px;
+      right: 6px;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: var(--verde);
+      color: white;
+      font-size: 10px;
+      line-height: 15px;
+      font-weight: bold;
+    }
+
+    /* FRASE */
+
+    .observation {
       display: flex;
       align-items: center;
-      gap: 10px;
+      justify-content: center;
+      gap: 7px;
+      margin: 16px 0 13px;
+      color: #65705f;
+      font-size: 11px;
+    }
+
+    /* BOTÃO */
+
+    .save {
       width: 100%;
-      min-height: 48px;
-      padding: 12px 14px;
-      border: 1.5px solid #e1e5df;
-      border-radius: 13px;
-      background: #fafbf9;
-      font-size: 14px;
-      line-height: 1.3;
-      transition: 0.15s ease;
-    }
-
-    .option span::before {
-      content: "";
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      border: 2px solid #a7b0a4;
-      flex-shrink: 0;
-    }
-
-    .option input:checked + span {
-      border-color: #5f7f62;
-      background: #edf3e9;
-      color: #2f4d34;
-      font-weight: 600;
-    }
-
-    .option input:checked + span::before {
-      background: #5f7f62;
-      border-color: #5f7f62;
-      box-shadow: inset 0 0 0 3px #edf3e9;
-    }
-
-    .status-green {
-      color: #397449;
-    }
-
-    .status-yellow {
-      color: #9b791c;
-    }
-
-    .status-red {
-      color: #a14a45;
-    }
-
-    .save-button {
-      width: 100%;
-      border: none;
-      border-radius: 15px;
-      padding: 16px;
-      margin-top: 8px;
-      background: #355a3a;
+      border: 0;
+      border-radius: 14px;
+      background: var(--verde);
       color: white;
-      font-size: 16px;
-      font-weight: 700;
+      padding: 16px 18px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 1px;
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(53, 90, 58, 0.2);
+      box-shadow: 0 5px 14px rgba(64,92,53,.18);
     }
 
-    .save-button:hover {
-      background: #29472e;
+    .save span {
+      margin-left: 6px;
+      font-size: 18px;
+      vertical-align: -1px;
     }
 
-    .footer {
-      text-align: center;
-      margin-top: 22px;
-      font-size: 12px;
-      color: #899187;
+    /* MENU INFERIOR */
+
+    .bottom-nav {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 76px;
+      border-top: 1px solid rgba(64,92,53,.12);
+      background: rgba(250,248,241,.96);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
     }
 
-    @media (max-width: 480px) {
-      .app {
-        padding: 20px 14px 36px;
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      color: #8b8c83;
+      font-size: 11px;
+    }
+
+    .nav-item:first-child {
+      border-right: 1px solid rgba(64,92,53,.09);
+    }
+
+    .nav-item.active {
+      color: var(--verde);
+      font-weight: 700;
+    }
+
+    .nav-icon {
+      font-size: 21px;
+      line-height: 1;
+    }
+
+    /* CELULAR PEQUENO */
+
+    @media (max-width: 370px) {
+      .phone-app {
+        padding-left: 11px;
+        padding-right: 11px;
       }
 
-      .brand {
-        font-size: 27px;
+      .answer-box {
+        font-size: 9px;
+        padding-left: 3px;
+        padding-right: 3px;
       }
 
-      .intro h1 {
-        font-size: 24px;
+      .habit {
+        padding: 11px;
+      }
+    }
+
+    /* NO COMPUTADOR */
+
+    @media (min-width: 600px) {
+      body {
+        padding: 30px 0;
       }
 
-      .habit-card {
-        padding: 17px;
+      .phone-app {
+        min-height: 800px;
+        border-radius: 28px;
+        box-shadow: 0 15px 45px rgba(30,40,28,.13);
+        overflow: hidden;
       }
     }
   </style>
@@ -201,107 +365,210 @@
 
 <body>
 
-  <main class="app">
+  <main class="phone-app">
 
-    <header class="header">
-      <p class="brand">Método 365 🌱</p>
-      <p class="subtitle">Consistência que se constrói</p>
+    <header class="top">
+      <div>
+        <div class="logo-small">Método</div>
+        <div class="logo-number">365<span>🌱</span></div>
+      </div>
+
+      <div class="motto">
+        Pequenas escolhas,<br>
+        grandes mudanças.
+      </div>
     </header>
 
-    <section class="intro">
-      <h1>Meu Dia</h1>
-      <p>Seu espaço para acompanhar, aos poucos, os hábitos que você vem construindo.</p>
-    </section>
+    <p class="date" id="todayDate">Hoje</p>
+    <h1>Como foi seu dia?</h1>
 
-    <section class="habit-card">
-      <div class="habit-title">
-        <span>🥗</span>
-        <span>Vegetais</span>
+    <!-- VEGETAIS -->
+
+    <section class="habit">
+
+      <div class="habit-head">
+        <div class="habit-icon">🥬</div>
+
+        <div>
+          <p class="habit-name">Vegetais</p>
+          <p class="habit-question">
+            Hoje teve vegetais na sua alimentação?
+          </p>
+        </div>
       </div>
 
-      <p class="question">Hoje teve vegetais na sua alimentação?</p>
+      <div class="answers three">
 
-      <label class="option">
-        <input type="radio" name="vegetais" value="mais-de-uma">
-        <span><strong class="status-green">●</strong> Em mais de uma refeição</span>
-      </label>
+        <label class="answer">
+          <input type="radio" name="vegetais" value="mais-de-uma">
+          <span class="answer-box green">
+            <span class="dot"></span>
+            Em mais de uma refeição
+          </span>
+        </label>
 
-      <label class="option">
-        <input type="radio" name="vegetais" value="uma">
-        <span><strong class="status-yellow">●</strong> Apenas em uma refeição</span>
-      </label>
+        <label class="answer">
+          <input type="radio" name="vegetais" value="uma">
+          <span class="answer-box yellow">
+            <span class="dot"></span>
+            Apenas em uma refeição
+          </span>
+        </label>
 
-      <label class="option">
-        <input type="radio" name="vegetais" value="nao">
-        <span><strong class="status-red">●</strong> Não</span>
-      </label>
+        <label class="answer">
+          <input type="radio" name="vegetais" value="nao">
+          <span class="answer-box red">
+            <span class="dot"></span>
+            Não
+          </span>
+        </label>
+
+      </div>
     </section>
 
-    <section class="habit-card">
-      <div class="habit-title">
-        <span>🏃</span>
-        <span>Movimento</span>
+    <!-- MOVIMENTO -->
+
+    <section class="habit">
+
+      <div class="habit-head">
+        <div class="habit-icon">🏃</div>
+
+        <div>
+          <p class="habit-name">Movimento</p>
+          <p class="habit-question">
+            Como foi seu movimento hoje?
+          </p>
+        </div>
       </div>
 
-      <p class="question">Como foi seu movimento hoje?</p>
+      <div class="answers four">
 
-      <label class="option">
-        <input type="radio" name="movimento" value="programado">
-        <span>Fiz o que estava programado</span>
-      </label>
+        <label class="answer">
+          <input type="radio" name="movimento" value="programado">
+          <span class="answer-box green">
+            <span class="dot"></span>
+            Fiz o que estava programado
+          </span>
+        </label>
 
-      <label class="option">
-        <input type="radio" name="movimento" value="programado-mais">
-        <span>Fiz o programado + me movimentei além</span>
-      </label>
+        <label class="answer">
+          <input type="radio" name="movimento" value="programado-mais">
+          <span class="answer-box yellow">
+            <span class="dot"></span>
+            Fiz o programado + me movimentei além
+          </span>
+        </label>
 
-      <label class="option">
-        <input type="radio" name="movimento" value="sem-treino">
-        <span>Me movimentei, mesmo sem treino programado</span>
-      </label>
+        <label class="answer">
+          <input type="radio" name="movimento" value="sem-treino">
+          <span class="answer-box yellow">
+            <span class="dot"></span>
+            Me movimentei, mesmo sem treino programado
+          </span>
+        </label>
 
-      <label class="option">
-        <input type="radio" name="movimento" value="nao">
-        <span>Hoje não rolou</span>
-      </label>
+        <label class="answer">
+          <input type="radio" name="movimento" value="nao">
+          <span class="answer-box red">
+            <span class="dot"></span>
+            Hoje não rolou
+          </span>
+        </label>
+
+      </div>
     </section>
 
-    <section class="habit-card">
-      <div class="habit-title">
-        <span>🤝</span>
-        <span>Relações</span>
+    <!-- RELAÇÕES -->
+
+    <section class="habit">
+
+      <div class="habit-head">
+        <div class="habit-icon">👥</div>
+
+        <div>
+          <p class="habit-name">Relações</p>
+          <p class="habit-question">
+            Hoje você conseguiu respeitar suas escolhas nas relações com outras pessoas?
+          </p>
+        </div>
       </div>
 
-      <p class="question">Hoje você conseguiu respeitar suas escolhas nas relações com outras pessoas?</p>
+      <div class="answers four">
 
-      <label class="option">
-        <input type="radio" name="relacoes" value="sim">
-        <span>Sim</span>
-      </label>
+        <label class="answer">
+          <input type="radio" name="relacoes" value="sim">
+          <span class="answer-box green">
+            <span class="dot"></span>
+            Sim
+          </span>
+        </label>
 
-      <label class="option">
-        <input type="radio" name="relacoes" value="em-parte">
-        <span>Em parte</span>
-      </label>
+        <label class="answer">
+          <input type="radio" name="relacoes" value="em-parte">
+          <span class="answer-box yellow">
+            <span class="dot"></span>
+            Em parte
+          </span>
+        </label>
 
-      <label class="option">
-        <input type="radio" name="relacoes" value="nao">
-        <span>Não</span>
-      </label>
+        <label class="answer">
+          <input type="radio" name="relacoes" value="nao">
+          <span class="answer-box red">
+            <span class="dot"></span>
+            Não
+          </span>
+        </label>
 
-      <label class="option">
-        <input type="radio" name="relacoes" value="nao-apareceu">
-        <span>Hoje isso não apareceu</span>
-      </label>
+        <label class="answer">
+          <input type="radio" name="relacoes" value="nao-apareceu">
+          <span class="answer-box neutral">
+            <span class="dot"></span>
+            Hoje isso não apareceu
+          </span>
+        </label>
+
+      </div>
     </section>
 
-    <button class="save-button" type="button">
-      Salvar meu dia
+    <div class="observation">
+      <span>🌱</span>
+      <span>Seu check-in é para observar, não para acertar.</span>
+    </div>
+
+    <button class="save" type="button">
+      SALVAR MEU DIA <span>→</span>
     </button>
 
-    <p class="footer">Método 365 🌱</p>
+    <nav class="bottom-nav">
+
+      <div class="nav-item active">
+        <div class="nav-icon">⌂</div>
+        <div>Hoje</div>
+      </div>
+
+      <div class="nav-item">
+        <div class="nav-icon">▥</div>
+        <div>Meu histórico</div>
+      </div>
+
+    </nav>
 
   </main>
+
+  <script>
+    const dateElement = document.getElementById("todayDate");
+
+    const today = new Date();
+
+    const formattedDate = new Intl.DateTimeFormat("pt-BR", {
+      weekday: "long",
+      day: "numeric",
+      month: "long"
+    }).format(today);
+
+    dateElement.textContent =
+      formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
+  </script>
 
 </body>
 </html>
