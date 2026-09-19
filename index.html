@@ -340,9 +340,44 @@
       }
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script> 
+    const SUPABASE_URL = "https://arqvqcjfjmhazpqxfxsi.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_eJI5sV1Z_BTHLGxt0NYgew_4uuJDrur"
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  </script>
 </head>
 
 <body>
+  <div id="loginScreen" style="display:none;">
+  <div class="login-box">
+    <div class="login-brand">MÉTODO</div>
+    <div class="login-365">365 🌱</div>
+
+    <h2>Bem-vinda</h2>
+    <p>Entre para acompanhar os hábitos que você vem construindo.</p>
+
+    <input
+      type="email"
+      id="loginEmail"
+      placeholder="Seu e-mail"
+      autocomplete="email"
+    >
+
+    <input
+      type="password"
+      id="loginPassword"
+      placeholder="Sua senha"
+      autocomplete="current-password"
+    >
+
+    <button type="button" id="loginButton">
+      ENTRAR
+    </button>
+
+    <p id="loginMessage"></p>
+  </div>
+</div>
 
   <main class="phone-app">
 
