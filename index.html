@@ -6,28 +6,22 @@
   <title>Método 365 🌱</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     :root {
       --verde: #405c35;
       --verde-medio: #71876a;
       --verde-claro: #e8eee2;
       --creme: #f4f0e5;
-      --creme-card: #fbfaf6;
       --texto: #263124;
       --texto-suave: #697064;
 
       --positivo: #5f9b4f;
       --positivo-bg: #edf4e7;
-
       --atencao: #d9ad43;
       --atencao-bg: #faf3dd;
-
       --negativo: #d66a5e;
       --negativo-bg: #f8e8e4;
-
       --neutro: #a5a69b;
       --neutro-bg: #f0f0eb;
     }
@@ -46,7 +40,7 @@
       margin: 0 auto;
       background: var(--creme);
       position: relative;
-      padding: 22px 16px 105px;
+      padding: 18px 16px 105px;
     }
 
     /* CABEÇALHO */
@@ -55,53 +49,54 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 22px;
+      margin-bottom: 10px;
     }
 
     .logo-small {
-      font-size: 11px;
+      font-size: 13px;
       text-transform: uppercase;
-      letter-spacing: 1.5px;
+      letter-spacing: 2px;
       color: var(--verde-medio);
-      margin-bottom: -4px;
+      margin: 0 0 -5px 2px;
     }
 
     .logo-number {
       font-family: Georgia, "Times New Roman", serif;
-      font-size: 48px;
-      line-height: 0.95;
+      font-size: 62px;
+      line-height: .92;
       font-weight: 400;
       color: var(--verde);
     }
 
     .logo-number span {
-      font-size: 23px;
+      font-size: 27px;
       vertical-align: top;
       margin-left: 3px;
     }
 
     .motto {
-      max-width: 115px;
-      margin-top: 3px;
+      max-width: 125px;
+      margin-top: 5px;
       font-family: Georgia, "Times New Roman", serif;
       font-style: italic;
-      font-size: 14px;
-      line-height: 1.3;
+      font-size: 16px;
+      line-height: 1.28;
       color: var(--verde);
       transform: rotate(-3deg);
       text-align: right;
     }
 
     .date {
-      margin: 0 0 3px;
+      margin: 10px 0 3px;
       color: var(--texto-suave);
-      font-size: 14px;
+      font-size: 15px;
     }
 
     h1 {
-      margin: 0 0 18px;
+      margin: 0 0 17px;
       font-family: Georgia, "Times New Roman", serif;
-      font-size: 29px;
+      font-size: 31px;
+      line-height: 1.05;
       font-weight: 500;
       color: #283625;
     }
@@ -109,7 +104,7 @@
     /* CARDS */
 
     .habit {
-      background: rgba(255,255,255,.72);
+      background: rgba(255,255,255,.74);
       border: 1px solid rgba(64,92,53,.08);
       border-radius: 18px;
       padding: 13px;
@@ -139,7 +134,7 @@
     .habit-name {
       margin: 0 0 2px;
       color: var(--verde);
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 800;
       letter-spacing: .8px;
       text-transform: uppercase;
@@ -147,8 +142,8 @@
 
     .habit-question {
       margin: 0;
-      font-size: 13px;
-      line-height: 1.25;
+      font-size: 14px;
+      line-height: 1.3;
       color: #2d342b;
     }
 
@@ -156,7 +151,7 @@
 
     .answers {
       display: grid;
-      gap: 5px;
+      gap: 6px;
     }
 
     .answers.three {
@@ -165,6 +160,10 @@
 
     .answers.four {
       grid-template-columns: repeat(4, 1fr);
+    }
+
+    .answers.movement-grid {
+      grid-template-columns: repeat(2, 1fr);
     }
 
     .answer {
@@ -180,8 +179,8 @@
     }
 
     .answer-box {
-      height: 82px;
-      padding: 9px 5px 7px;
+      min-height: 92px;
+      padding: 10px 7px 8px;
       border-radius: 11px;
       border: 1.5px solid transparent;
       display: flex;
@@ -189,50 +188,37 @@
       align-items: center;
       justify-content: flex-start;
       text-align: center;
-      font-size: 10px;
-      line-height: 1.15;
+      font-size: 12px;
+      line-height: 1.25;
       transition: .15s ease;
     }
 
+    .movement-grid .answer-box {
+      min-height: 82px;
+      justify-content: center;
+      padding: 9px 12px;
+      font-size: 13px;
+    }
+
     .dot {
-      width: 13px;
-      height: 13px;
+      width: 14px;
+      height: 14px;
       border-radius: 50%;
-      margin-bottom: 8px;
+      margin-bottom: 9px;
       flex: 0 0 auto;
     }
 
-    .green {
-      background: var(--positivo-bg);
-    }
+    .green { background: var(--positivo-bg); }
+    .green .dot { background: var(--positivo); }
 
-    .green .dot {
-      background: var(--positivo);
-    }
+    .yellow { background: var(--atencao-bg); }
+    .yellow .dot { background: var(--atencao); }
 
-    .yellow {
-      background: var(--atencao-bg);
-    }
+    .red { background: var(--negativo-bg); }
+    .red .dot { background: var(--negativo); }
 
-    .yellow .dot {
-      background: var(--atencao);
-    }
-
-    .red {
-      background: var(--negativo-bg);
-    }
-
-    .red .dot {
-      background: var(--negativo);
-    }
-
-    .neutral {
-      background: var(--neutro-bg);
-    }
-
-    .neutral .dot {
-      background: var(--neutro);
-    }
+    .neutral { background: var(--neutro-bg); }
+    .neutral .dot { background: var(--neutro); }
 
     .answer input:checked + .answer-box {
       border-color: var(--verde);
@@ -264,7 +250,8 @@
       gap: 7px;
       margin: 16px 0 13px;
       color: #65705f;
-      font-size: 11px;
+      font-size: 12px;
+      text-align: center;
     }
 
     /* BOTÃO */
@@ -276,7 +263,7 @@
       background: var(--verde);
       color: white;
       padding: 16px 18px;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 800;
       letter-spacing: 1px;
       cursor: pointer;
@@ -289,7 +276,7 @@
       vertical-align: -1px;
     }
 
-    /* MENU INFERIOR */
+    /* MENU */
 
     .bottom-nav {
       position: absolute;
@@ -327,26 +314,18 @@
       line-height: 1;
     }
 
-    /* CELULAR PEQUENO */
-
     @media (max-width: 370px) {
       .phone-app {
         padding-left: 11px;
         padding-right: 11px;
       }
 
-      .answer-box {
-        font-size: 9px;
-        padding-left: 3px;
-        padding-right: 3px;
-      }
-
-      .habit {
-        padding: 11px;
+      .answers.four .answer-box {
+        font-size: 10.5px;
+        padding-left: 4px;
+        padding-right: 4px;
       }
     }
-
-    /* NO COMPUTADOR */
 
     @media (min-width: 600px) {
       body {
@@ -388,12 +367,9 @@
 
       <div class="habit-head">
         <div class="habit-icon">🥬</div>
-
         <div>
           <p class="habit-name">Vegetais</p>
-          <p class="habit-question">
-            Hoje teve vegetais na sua alimentação?
-          </p>
+          <p class="habit-question">Hoje teve vegetais na sua alimentação?</p>
         </div>
       </div>
 
@@ -432,16 +408,13 @@
 
       <div class="habit-head">
         <div class="habit-icon">🏃</div>
-
         <div>
           <p class="habit-name">Movimento</p>
-          <p class="habit-question">
-            Como foi seu movimento hoje?
-          </p>
+          <p class="habit-question">Como foi seu movimento hoje?</p>
         </div>
       </div>
 
-      <div class="answers four">
+      <div class="answers movement-grid">
 
         <label class="answer">
           <input type="radio" name="movimento" value="programado">
@@ -484,7 +457,6 @@
 
       <div class="habit-head">
         <div class="habit-icon">👥</div>
-
         <div>
           <p class="habit-name">Relações</p>
           <p class="habit-question">
@@ -540,7 +512,6 @@
     </button>
 
     <nav class="bottom-nav">
-
       <div class="nav-item active">
         <div class="nav-icon">⌂</div>
         <div>Hoje</div>
@@ -550,14 +521,12 @@
         <div class="nav-icon">▥</div>
         <div>Meu histórico</div>
       </div>
-
     </nav>
 
   </main>
 
   <script>
     const dateElement = document.getElementById("todayDate");
-
     const today = new Date();
 
     const formattedDate = new Intl.DateTimeFormat("pt-BR", {
