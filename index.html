@@ -379,7 +379,7 @@
   </div>
 </div>
 
-  <main class="phone-app">
+  <main class="phone-app" id="appScreen">
 
     <header class="top">
       <div>
@@ -577,7 +577,13 @@
   async function checkSession() {const { data } = await supabaseClient.auth.getSession()
                                 if (!data.session) {
   document.getElementById("loginScreen").style.display = "flex";
-}}
+                                  document.getElementById("appScreen").style.display = "none";
+}
+                                 else{
+                                   document.getElementById("loginScreen").style.display = "none";
+                                   document.getElementById("appScreen").style.display = "block";
+                                }
+                                }
   checkSession();
   const loginButton = document.getElementById("loginButton");
   loginButton.addEventListener("click", async () => {
