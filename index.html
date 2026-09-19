@@ -4,88 +4,304 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Método 365 🌱</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f1e8;
+      color: #30382f;
+    }
+
+    .app {
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 28px 18px 45px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .brand {
+      font-size: 30px;
+      font-weight: 700;
+      margin: 0;
+      color: #355a3a;
+    }
+
+    .subtitle {
+      margin: 6px 0 0;
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #798276;
+    }
+
+    .intro {
+      background: #e7eee2;
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 22px;
+    }
+
+    .intro h1 {
+      margin: 0 0 8px;
+      font-size: 26px;
+      color: #2f4d34;
+    }
+
+    .intro p {
+      margin: 0;
+      line-height: 1.5;
+      font-size: 15px;
+      color: #596357;
+    }
+
+    .habit-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    }
+
+    .habit-title {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 8px;
+      font-size: 20px;
+      font-weight: 700;
+      color: #355a3a;
+    }
+
+    .question {
+      margin: 0 0 16px;
+      font-size: 15px;
+      line-height: 1.45;
+      color: #50594e;
+    }
+
+    .option {
+      display: block;
+      position: relative;
+      margin-bottom: 9px;
+      cursor: pointer;
+    }
+
+    .option:last-child {
+      margin-bottom: 0;
+    }
+
+    .option input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .option span {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      min-height: 48px;
+      padding: 12px 14px;
+      border: 1.5px solid #e1e5df;
+      border-radius: 13px;
+      background: #fafbf9;
+      font-size: 14px;
+      line-height: 1.3;
+      transition: 0.15s ease;
+    }
+
+    .option span::before {
+      content: "";
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 2px solid #a7b0a4;
+      flex-shrink: 0;
+    }
+
+    .option input:checked + span {
+      border-color: #5f7f62;
+      background: #edf3e9;
+      color: #2f4d34;
+      font-weight: 600;
+    }
+
+    .option input:checked + span::before {
+      background: #5f7f62;
+      border-color: #5f7f62;
+      box-shadow: inset 0 0 0 3px #edf3e9;
+    }
+
+    .status-green {
+      color: #397449;
+    }
+
+    .status-yellow {
+      color: #9b791c;
+    }
+
+    .status-red {
+      color: #a14a45;
+    }
+
+    .save-button {
+      width: 100%;
+      border: none;
+      border-radius: 15px;
+      padding: 16px;
+      margin-top: 8px;
+      background: #355a3a;
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(53, 90, 58, 0.2);
+    }
+
+    .save-button:hover {
+      background: #29472e;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 22px;
+      font-size: 12px;
+      color: #899187;
+    }
+
+    @media (max-width: 480px) {
+      .app {
+        padding: 20px 14px 36px;
+      }
+
+      .brand {
+        font-size: 27px;
+      }
+
+      .intro h1 {
+        font-size: 24px;
+      }
+
+      .habit-card {
+        padding: 17px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-  <h1>Método 365 🌱</h1>
-  <h2>Meu Dia</h2>
+  <main class="app">
 
-  <p>Seu espaço para acompanhar, aos poucos, os hábitos que você vem construindo.</p>
+    <header class="header">
+      <p class="brand">Método 365 🌱</p>
+      <p class="subtitle">Consistência que se constrói</p>
+    </header>
 
-  <hr>
+    <section class="intro">
+      <h1>Meu Dia</h1>
+      <p>Seu espaço para acompanhar, aos poucos, os hábitos que você vem construindo.</p>
+    </section>
 
-  <h3>🥗 Vegetais</h3>
-  <p>Hoje teve vegetais na sua alimentação?</p>
+    <section class="habit-card">
+      <div class="habit-title">
+        <span>🥗</span>
+        <span>Vegetais</span>
+      </div>
 
-  <label>
-    <input type="radio" name="vegetais" value="mais-de-uma">
-    🟢 Em mais de uma refeição
-  </label><br>
+      <p class="question">Hoje teve vegetais na sua alimentação?</p>
 
-  <label>
-    <input type="radio" name="vegetais" value="uma">
-    🟡 Apenas em uma refeição
-  </label><br>
+      <label class="option">
+        <input type="radio" name="vegetais" value="mais-de-uma">
+        <span><strong class="status-green">●</strong> Em mais de uma refeição</span>
+      </label>
 
-  <label>
-    <input type="radio" name="vegetais" value="nao">
-    🔴 Não
-  </label>
+      <label class="option">
+        <input type="radio" name="vegetais" value="uma">
+        <span><strong class="status-yellow">●</strong> Apenas em uma refeição</span>
+      </label>
 
-  <hr>
+      <label class="option">
+        <input type="radio" name="vegetais" value="nao">
+        <span><strong class="status-red">●</strong> Não</span>
+      </label>
+    </section>
 
-  <h3>🏃 Movimento</h3>
-  <p>Como foi seu movimento hoje?</p>
+    <section class="habit-card">
+      <div class="habit-title">
+        <span>🏃</span>
+        <span>Movimento</span>
+      </div>
 
-  <label>
-    <input type="radio" name="movimento" value="programado">
-    Fiz o que estava programado
-  </label><br>
+      <p class="question">Como foi seu movimento hoje?</p>
 
-  <label>
-    <input type="radio" name="movimento" value="programado-mais">
-    Fiz o programado + me movimentei além
-  </label><br>
+      <label class="option">
+        <input type="radio" name="movimento" value="programado">
+        <span>Fiz o que estava programado</span>
+      </label>
 
-  <label>
-    <input type="radio" name="movimento" value="sem-treino">
-    Me movimentei, mesmo sem treino programado
-  </label><br>
+      <label class="option">
+        <input type="radio" name="movimento" value="programado-mais">
+        <span>Fiz o programado + me movimentei além</span>
+      </label>
 
-  <label>
-    <input type="radio" name="movimento" value="nao">
-    Hoje não rolou
-  </label>
+      <label class="option">
+        <input type="radio" name="movimento" value="sem-treino">
+        <span>Me movimentei, mesmo sem treino programado</span>
+      </label>
 
-  <hr>
+      <label class="option">
+        <input type="radio" name="movimento" value="nao">
+        <span>Hoje não rolou</span>
+      </label>
+    </section>
 
-  <h3>🤝 Relações</h3>
-  <p>Hoje você conseguiu respeitar suas escolhas nas relações com outras pessoas?</p>
+    <section class="habit-card">
+      <div class="habit-title">
+        <span>🤝</span>
+        <span>Relações</span>
+      </div>
 
-  <label>
-    <input type="radio" name="relacoes" value="sim">
-    Sim
-  </label><br>
+      <p class="question">Hoje você conseguiu respeitar suas escolhas nas relações com outras pessoas?</p>
 
-  <label>
-    <input type="radio" name="relacoes" value="em-parte">
-    Em parte
-  </label><br>
+      <label class="option">
+        <input type="radio" name="relacoes" value="sim">
+        <span>Sim</span>
+      </label>
 
-  <label>
-    <input type="radio" name="relacoes" value="nao">
-    Não
-  </label><br>
+      <label class="option">
+        <input type="radio" name="relacoes" value="em-parte">
+        <span>Em parte</span>
+      </label>
 
-  <label>
-    <input type="radio" name="relacoes" value="nao-apareceu">
-    Hoje isso não apareceu
-  </label>
+      <label class="option">
+        <input type="radio" name="relacoes" value="nao">
+        <span>Não</span>
+      </label>
 
-  <hr>
+      <label class="option">
+        <input type="radio" name="relacoes" value="nao-apareceu">
+        <span>Hoje isso não apareceu</span>
+      </label>
+    </section>
 
-  <button>Salvar meu dia</button>
+    <button class="save-button" type="button">
+      Salvar meu dia
+    </button>
+
+    <p class="footer">Método 365 🌱</p>
+
+  </main>
 
 </body>
 </html>
