@@ -573,6 +573,12 @@
     dateElement.textContent =
       formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
   </script>
-
+<script>  
+  async function checkSession() {const { data } = await supabaseClient.auth.getSession()
+                                if (!data.session) {
+  document.getElementById("loginScreen").style.display = "flex";
+}}
+  checkSession();
+</script>
 </body>
 </html>
