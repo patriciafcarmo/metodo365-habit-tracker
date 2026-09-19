@@ -579,6 +579,20 @@
   document.getElementById("loginScreen").style.display = "flex";
 }}
   checkSession();
+  const loginButton = document.getElementById("loginButton");
+  const email = document.getElementById("loginEmail").value;
+  const password = document.getElementById("loginPassword").value
+  const {error} = await supabaseClient.auth.signInWithPassword({
+    email: email, 
+    password: password
+  });
+  if (error) {
+    document.getElementById("loginMessage").textContent = "E-mail ou senha incorretos."; 
+    return;
+  }
+  document.getElementById("loginScreen").style.display = "none";
+  location.reload();
+  });
 </script>
 </body>
 </html>
