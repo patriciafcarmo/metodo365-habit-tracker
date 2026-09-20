@@ -617,7 +617,7 @@
       <span>Seu check-in é para observar, não para acertar.</span>
     </div>
 
-    <button class="save" type="button">
+    <button class="save" type="button"id="saveButton">
       SALVAR MEU DIA <span>→</span>
     </button>
 
@@ -675,6 +675,38 @@
   document.getElementById("loginScreen").style.display = "none";
   location.reload();
   });
+  const saveButton = document.getElementById("saveButton");
+
+saveButton.addEventListener("click", async () => {
+    const vegetais = document.querySelector('input[name="vegetais"]:checked');
+  const movimento = document.querySelector('input[name="movimento"]:checked');
+  const relacoes = document.querySelector('input[name="relacoes"]:checked');
+    if (!vegetais || !movimento || !relacoes) {
+    alert("Responda às três perguntas antes de salvar o seu dia. 🌱");
+    return;
+  }
+    const { data: userData } = await supabaseClient.auth.getUser();
+  const user = userData.user;
+    const checkinDate = new Intl.DateTimeFormat("en-CA", { timeZone: "America/Sao_Paulo" }).format(new Date());
+    const { error } = await supabaseClient
+    .from("daily_checkins")
+    .upsert({
+            user_id: user.id,
+      checkin_date: checkinDate,
+      vegetais: vegetais.value,
+      movimento: movimento.value,
+      relacoes: relacoes.value
+            }, {
+      onConflict: "user_id,checkin_date"
+    })
+  .select();
+    if (error) {
+    alert("Não foi possível salvar seu dia. Tente novamente.");
+    console.error(error);
+    return;
+  }
+  alert("Seu dia foi salvo! 🌱");
+});
 </script>
 </body>
 </html>
