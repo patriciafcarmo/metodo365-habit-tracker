@@ -725,14 +725,64 @@ const todayButton = document.getElementById("todayButton");
     historyList.innerHTML = "<p>Você ainda não tem nenhum dia registrado. 🌱</p>";
     return;
   }
-     historyList.innerHTML = data.map(item => `
-    <div>
-      <strong>${item.checkin_date}</strong>
-      <p>Vegetais: ${item.vegetais}</p>
-      <p>Movimento: ${item.movimento}</p>
-      <p>Relações: ${item.relacoes}</p>
+      const totalDias = data.length;
+
+  const vegetais = {
+    maisDeUma: 0,
+    uma: 0,
+    nao: 0
+  };
+     const movimento = {
+    programado: 0,
+    programadoMais: 0,
+    semTreino: 0,
+    naoRolou: 0
+  };
+     const relacoes = {
+    sim: 0,
+    emParte: 0,
+    nao: 0,
+    naoApareceu: 0
+  };
+     data.forEach(item => {
+    if (item.vegetais === "mais-de-uma") vegetais.maisDeUma++;
+    if (item.vegetais === "uma") vegetais.uma++;
+    if (item.vegetais === "nao") vegetais.nao++;
+           if (item.movimento === "programado") movimento.programado++;
+    if (item.movimento === "programado-mais") movimento.programadoMais++;
+           if (item.movimento === "sem-treino") movimento.semTreino++;
+    if (item.movimento === "nao") movimento.naoRolou++;
+           if (item.relacoes === "sim") relacoes.sim++;
+    if (item.relacoes === "em-parte") relacoes.emParte++;
+    if (item.relacoes === "nao") relacoes.nao++;
+    if (item.relacoes === "nao-apareceu") relacoes.naoApareceu++;
+         });
+     historyList.innerHTML = `<div class="history-summary">
+         <div class="history-total">
+      <strong>${totalDias}</strong>
+      <span>dias registrados</span>
     </div>
-  `).join("");
+        <div class="history-card">
+      <h3>🥦 Vegetais</h3>
+      <p><strong>${vegetais.maisDeUma}</strong> dias em mais de uma refeição</p>
+      <p><strong>${vegetais.uma}</strong> dias em uma refeição</p>
+      <p><strong>${vegetais.nao}</strong> dias sem vegetais</p>
+    </div>
+        <div class="history-card">
+      <h3>🏃 Movimento</h3>
+      <p><strong>${movimento.programado}</strong> dias fiz o que estava programado</p>
+      <p><strong>${movimento.programadoMais}</strong> dias fiz o programado + me movimentei além</p>
+      <p><strong>${movimento.semTreino}</strong> dias me movimentei mesmo sem treino programado</p>
+      <p><strong>${movimento.naoRolou}</strong> dias em que não rolou</p>
+    </div>
+        <div class="history-card">
+      <h3>🤝 Relações</h3>
+      <p><strong>${relacoes.sim}</strong> dias consegui respeitar minhas escolhas</p>
+      <p><strong>${relacoes.emParte}</strong> dias consegui em parte</p>
+      <p><strong>${relacoes.nao}</strong> dias não consegui</p>
+      <p><strong>${relacoes.naoApareceu}</strong> dias em que isso não apareceu</p>
+    </div>
+      </div>`;
  }
   const saveButton = document.getElementById("saveButton");
 
