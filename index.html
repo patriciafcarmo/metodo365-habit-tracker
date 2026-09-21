@@ -627,14 +627,37 @@
         <div>Hoje</div>
       </div>
 
-      <div class="nav-item">
+      <div class="nav-item" id="historyButton">
         <div class="nav-icon">▥</div>
         <div>Meu histórico</div>
       </div>
     </nav>
 
   </main>
+<main class="phone-app" id="historyScreen" style="display: none;">
+    <header>
+    <div class="brand">MÉTODO 365 🌱</div>
+    <div class="motto">Pequenas escolhas, grandes mudanças.</div>
+  </header>
 
+  <section class="intro">
+    <h1>Meu histórico</h1>
+    <p>Veja os hábitos que você vem construindo ao longo dos dias.</p>
+  </section>
+    <section id="historyList">
+    <p>Carregando seu histórico...</p>
+  </section>
+    <nav class="bottom-nav">
+    <div class="nav-item" id="todayButton">
+      <span>☀️</span>
+      <span>Hoje</span>
+    </div>
+    <div class="nav-item active">
+      <span>📅</span>
+      <span>Meu histórico</span>
+    </div>
+  </nav>
+</main>
   <script>
     const dateElement = document.getElementById("todayDate");
     const today = new Date();
@@ -675,6 +698,16 @@
   document.getElementById("loginScreen").style.display = "none";
   location.reload();
   });
+ const historyButton = document.getElementById("historyButton");
+const todayButton = document.getElementById("todayButton");
+  historyButton.addEventListener("click", () => {
+  document.getElementById("appScreen").style.display = "none";
+  document.getElementById("historyScreen").style.display = "block";
+});
+  todayButton.addEventListener("click", () => {
+  document.getElementById("historyScreen").style.display = "none";
+  document.getElementById("appScreen").style.display = "block";
+});
   const saveButton = document.getElementById("saveButton");
 
 saveButton.addEventListener("click", async () => {
