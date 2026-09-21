@@ -457,6 +457,14 @@
   line-height: 1.4;
   color: #555;
 }
+    .history-card p strong {
+  font-size: 17px;
+  color: #333;
+}
+    .history-card p + p {
+  border-top: 1px solid #eeeeee;
+  padding-top: 9px;
+}
   </style>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script> 
@@ -803,7 +811,7 @@ const todayButton = document.getElementById("todayButton");
      historyList.innerHTML = `<div class="history-summary">
          <div class="history-total">
       <strong>${totalDias}</strong>
-      <span>dias registrados</span>
+     <span>${totalDias === 1 ? "dia registrado" : "dias registrados"}</span>
     </div>
         <div class="history-card">
       <h3>🥦 Vegetais</h3>
