@@ -703,11 +703,37 @@ const todayButton = document.getElementById("todayButton");
   historyButton.addEventListener("click", () => {
   document.getElementById("appScreen").style.display = "none";
   document.getElementById("historyScreen").style.display = "block";
+      loadHistory();
 });
   todayButton.addEventListener("click", () => {
   document.getElementById("historyScreen").style.display = "none";
   document.getElementById("appScreen").style.display = "block";
 });
+ async function loadHistory() {
+     const historyList = document.getElementById("historyList");
+  historyList.innerHTML = "<p>Carregando seu histórico...</p>";
+     const { data, error } = await supabaseClient
+    .from("daily_checkins")
+    .select("checkin_date, vegetais, movimento, relacoes")
+    .order("checkin_date", { ascending: false });
+     if (error) {
+    historyList.innerHTML = "<p>Não foi possível carregar seu histórico.</p>";
+    console.error(error);
+    return;
+  }
+     if (!data || data.length === 0) {
+    historyList.innerHTML = "<p>Você ainda não tem nenhum dia registrado. 🌱</p>";
+    return;
+  }
+     historyList.innerHTML = data.map(item => `
+    <div>
+      <strong>${item.checkin_date}</strong>
+      <p>Vegetais: ${item.vegetais}</p>
+      <p>Movimento: ${item.movimento}</p>
+      <p>Relações: ${item.relacoes}</p>
+    </div>
+  `).join("");
+ }
   const saveButton = document.getElementById("saveButton");
 
 saveButton.addEventListener("click", async () => {
