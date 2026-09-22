@@ -788,6 +788,7 @@ const todayButton = document.getElementById("todayButton");
       if (error || !data) {
     return;
   }
+      saveButton.innerHTML = 'ATUALIZAR MEU DIA <span>→</span>';
       const vegetaisInput = document.querySelector(
     `input[name="vegetais"][value="${data.vegetais}"]`
   );
