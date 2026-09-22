@@ -747,6 +747,7 @@ display: block;
                                 }
   checkSession();
   loadTodayCheckin();
+  loadTodayCheckin();
   const loginButton = document.getElementById("loginButton");
   loginButton.addEventListener("click", async () => {
   const email = document.getElementById("loginEmail").value;
@@ -887,6 +888,36 @@ const todayButton = document.getElementById("todayButton");
     </div>
       </div>`;
  }
+  async function loadTodayCheckin() {
+      const { data: userData } = await supabaseClient.auth.getUser();
+  const user = userData.user;
+      if (!user) return;
+      const checkinDate = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Sao_Paulo"
+  }).format(new Date());
+      const { data, error } = await supabaseClient
+    .from("daily_checkins")
+    .select("vegetais, movimento, relacoes")
+    .eq("user_id", user.id)
+    .eq("checkin_date", checkinDate)
+    .maybeSingle();
+      if (error || !data) return;
+      const vegetaisInput = document.querySelector(
+    `input[name="vegetais"][value="${data.vegetais}"]`
+  );
+
+  if (vegetaisInput) vegetaisInput.checked = true;
+      const movimentoInput = document.querySelector(
+    `input[name="movimento"][value="${data.movimento}"]`
+  );
+
+  if (movimentoInput) movimentoInput.checked = true;
+      const relacoesInput = document.querySelector(
+    `input[name="relacoes"][value="${data.relacoes}"]`
+  );
+
+  if (relacoesInput) relacoesInput.checked = true;
+    }
   const saveButton = document.getElementById("saveButton");
 
 saveButton.addEventListener("click", async () => {
