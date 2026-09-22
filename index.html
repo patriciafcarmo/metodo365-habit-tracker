@@ -745,6 +745,7 @@
                                 }
                                 }
   checkSession();
+  loadTodayCheckin();
   const loginButton = document.getElementById("loginButton");
   loginButton.addEventListener("click", async () => {
   const email = document.getElementById("loginEmail").value;
@@ -775,6 +776,40 @@ const todayButton = document.getElementById("todayButton");
   document.getElementById("historyScreen").style.display = "none";
   document.getElementById("appScreen").style.display = "block";
 });
+  async function loadTodayCheckin() {
+      const checkinDate = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Sao_Paulo"
+  }).format(new Date());
+      const { data, error } = await supabaseClient
+    .from("daily_checkins")
+    .select("vegetais, movimento, relacoes")
+    .eq("checkin_date", checkinDate)
+    .maybeSingle();
+      if (error || !data) {
+    return;
+  }
+      const vegetaisInput = document.querySelector(
+    `input[name="vegetais"][value="${data.vegetais}"]`
+  );
+
+  if (vegetaisInput) {
+    vegetaisInput.checked = true;
+  }
+      const movimentoInput = document.querySelector(
+    `input[name="movimento"][value="${data.movimento}"]`
+  );
+
+  if (movimentoInput) {
+    movimentoInput.checked = true;
+  }
+      const relacoesInput = document.querySelector(
+    `input[name="relacoes"][value="${data.relacoes}"]`
+  );
+
+  if (relacoesInput) {
+    relacoesInput.checked = true;
+  }
+    }
  async function loadHistory() {
      const historyList = document.getElementById("historyList");
   historyList.innerHTML = "<p>Carregando seu histórico...</p>";
