@@ -510,8 +510,40 @@ display: block;
     <button type="button" id="loginButton">
       ENTRAR
     </button>
-
+<button type="button" id="showSignupButton">
+  CRIAR MINHA CONTA
+</button>
     <p id="loginMessage"></p>
+    <div id="signupScreen" style="display: none;">
+      <h2>Criar minha conta</h2>
+<p>Crie seu acesso ao Método 365.</p>
+      <input
+  type="email"
+  id="signupEmail"
+  placeholder="Seu e-mail"
+  autocomplete="email"
+>
+      <input
+  type="password"
+  id="signupPassword"
+  placeholder="Crie uma senha"
+  autocomplete="new-password"
+>
+      <input
+  type="text"
+  id="signupCode"
+  placeholder="Código de acesso"
+  autocomplete="off"
+>
+      <button type="button" id="signupButton">
+  CRIAR CONTA
+</button>
+      <button type="button" id="backToLoginButton">
+  VOLTAR PARA O LOGIN
+</button>
+
+<p id="signupMessage"></p>
+      </div>
   </div>
 </div>
 
@@ -748,6 +780,63 @@ display: block;
   checkSession();
   loadTodayCheckin();
   loadTodayCheckin();
+  const showSignupButton = document.getElementById("showSignupButton");
+const signupButton = document.getElementById("signupButton");
+const backToLoginButton = document.getElementById("backToLoginButton");
+  showSignupButton.addEventListener("click", () => {
+  document.getElementById("signupScreen").style.display = "block";
+  document.getElementById("loginEmail").style.display = "none";
+  document.getElementById("loginPassword").style.display = "none";
+  document.getElementById("loginButton").style.display = "none";
+  showSignupButton.style.display = "none";
+  document.getElementById("loginMessage").style.display = "none";
+});
+  backToLoginButton.addEventListener("click", () => {
+  document.getElementById("signupScreen").style.display = "none";
+  document.getElementById("loginEmail").style.display = "block";
+  document.getElementById("loginPassword").style.display = "block";
+  document.getElementById("loginButton").style.display = "block";
+  showSignupButton.style.display = "block";
+  document.getElementById("loginMessage").style.display = "block";
+});
+  signupButton.addEventListener("click", async () => {
+  const email = document.getElementById("signupEmail").value.trim();
+  const password = document.getElementById("signupPassword").value;
+  const accessCode = document.getElementById("signupCode").value.trim();
+  const signupMessage = document.getElementById("signupMessage");
+
+  signupMessage.textContent = "";
+
+  if (!email || !password || !accessCode) {
+    signupMessage.textContent = "Preencha todos os campos.";
+    return;
+  }
+      signupMessage.textContent = "Verificando código de acesso...";
+
+  const { data, error } = await supabaseClient.functions.invoke("create-member", {
+    body: { accessCode }
+  });
+
+  if (error || !data?.valid) {
+    signupMessage.textContent = "Código de acesso inválido.";
+    return;
+  }
+      signupMessage.textContent = "Criando sua conta...";
+
+  const { error: signupError } = await supabaseClient.auth.signUp({
+    email,
+    password
+  });
+
+  if (signupError) {
+    signupMessage.textContent = "Não foi possível criar a conta. Verifique o e-mail e a senha.";
+    console.error(signupError);
+    return;
+  }
+
+  signupMessage.textContent = "Conta criada! Entrando... 🌱";
+  location.reload();
+});
   const loginButton = document.getElementById("loginButton");
   loginButton.addEventListener("click", async () => {
   const email = document.getElementById("loginEmail").value;
