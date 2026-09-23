@@ -776,8 +776,44 @@ display: block;
                                    document.getElementById("loginScreen").style.display = "none";
                                    document.getElementById("appScreen").style.display = "block";
                                 }
+                                 loadTodayAnswers();
                                 }
   checkSession();
+  async function loadTodayAnswers() {
+  const { data: userData } = await supabaseClient.auth.getUser();
+  const user = userData.user;
+
+  if (!user) return;
+
+  const checkinDate = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Sao_Paulo"
+  }).format(new Date());
+
+  const { data, error } = await supabaseClient
+    .from("daily_checkins")
+    .select("vegetais, movimento, relacoes")
+    .eq("user_id", user.id)
+    .eq("checkin_date", checkinDate)
+    .maybeSingle();
+
+  if (error || !data) return;
+
+  const vegetais = document.querySelector(
+    `input[name="vegetais"][value="${data.vegetais}"]`
+  );
+
+  const movimento = document.querySelector(
+    `input[name="movimento"][value="${data.movimento}"]`
+  );
+
+  const relacoes = document.querySelector(
+    `input[name="relacoes"][value="${data.relacoes}"]`
+  );
+
+  if (vegetais) vegetais.checked = true;
+  if (movimento) movimento.checked = true;
+  if (relacoes) relacoes.checked = true;
+}
   loadTodayCheckin();
   loadTodayCheckin();
   const showSignupButton = document.getElementById("showSignupButton");
