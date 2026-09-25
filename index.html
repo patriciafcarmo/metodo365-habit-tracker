@@ -767,6 +767,24 @@ display: block;
       formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
   </script>
 <script>  
+  async function checkIfAdmin() {
+  const { data: { user } } = await supabaseClient.auth.getUser();
+
+  if (!user) return false;
+
+  const { data, error } = await supabaseClient
+    .from("admins")
+    .select("id")
+    .eq("id", user.id)
+    .maybeSingle();
+
+  if (error) {
+    console.error("Erro ao verificar admin:", error);
+    return false;
+  }
+
+  return !!data;
+}
   async function checkSession() {const { data } = await supabaseClient.auth.getSession()
                                 if (!data.session) {
   document.getElementById("loginScreen").style.display = "flex";
@@ -775,6 +793,8 @@ display: block;
                                  else{
                                    document.getElementById("loginScreen").style.display = "none";
                                    document.getElementById("appScreen").style.display = "block";
+                                   const isAdmin = await checkIfAdmin(data.session.user.id);
+console.log("É administradora?", isAdmin);
                                 }
                                  loadTodayAnswers();
                                 }
