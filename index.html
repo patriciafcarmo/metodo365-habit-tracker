@@ -819,6 +819,47 @@ display: block;
   const showSignupButton = document.getElementById("showSignupButton");
 const signupButton = document.getElementById("signupButton");
 const backToLoginButton = document.getElementById("backToLoginButton");
+  signupButton.addEventListener("click", async () => {
+  const email = document.getElementById("signupEmail").value.trim();
+  const password = document.getElementById("signupPassword").value;
+  const accessCode = document.getElementById("signupCode").value.trim();
+  const message = document.getElementById("signupMessage");
+
+  message.textContent = "";
+
+  if (!email || !password || !accessCode) {
+    message.textContent = "Preencha e-mail, senha e código de acesso.";
+    return;
+  }
+      try {
+    const response = await fetch(
+      `${SUPABASE_URL}/functions/v1/create-member`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "apikey": SUPABASE_KEY,
+          "Authorization": `Bearer ${SUPABASE_KEY}`
+        },
+        body: JSON.stringify({
+          access_code: accessCode
+        })
+      }
+    );
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      message.textContent = result.error || "Código de acesso inválido.";
+      return;
+    }
+
+    message.textContent = "Código de acesso confirmado. 🌱";
+  } catch (error) {
+    message.textContent = "Não foi possível verificar o código. Tente novamente.";
+    console.error(error);
+  }
+});
   showSignupButton.addEventListener("click", () => {
   document.getElementById("signupScreen").style.display = "block";
   document.getElementById("loginEmail").style.display = "none";
