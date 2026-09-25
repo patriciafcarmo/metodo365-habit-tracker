@@ -855,6 +855,18 @@ const backToLoginButton = document.getElementById("backToLoginButton");
     }
 
     message.textContent = "Código de acesso confirmado. 🌱";
+            const { data: signupData, error: signupError } =
+      await supabaseClient.auth.signUp({
+        email: email,
+        password: password
+      });
+
+    if (signupError) {
+      message.textContent = "Não foi possível criar sua conta: " + signupError.message;
+      return;
+    }
+
+    message.textContent = "Conta criada com sucesso! 🌱";
   } catch (error) {
     message.textContent = "Não foi possível verificar o código. Tente novamente.";
     console.error(error);
