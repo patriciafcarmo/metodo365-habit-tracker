@@ -1061,23 +1061,7 @@ const user = userData.user;
     console.error(error);
     return;
   }
-   async function loadAdminData() {
-  const adminList = document.getElementById("adminList");
-
-  const { data, error } = await supabaseClient
-    .from("daily_checkins")
-    .select("user_id, checkin_date, vegetais, movimento, relacoes")
-    .order("checkin_date", { ascending: false });
-
-  if (error) {
-    console.error("Erro ao carregar dados do admin:", error);
-    adminList.innerHTML = "<p>Não foi possível carregar os dados.</p>";
-    return;
-  }
-
-  console.log("Dados do painel admin:", data);
-     adminList.innerHTML = `<p>${data.length} check-ins encontrados.</p>`;
-}
+   
      if (!data || data.length === 0) {
     historyList.innerHTML = "<p>Você ainda não tem nenhum dia registrado. 🌱</p>";
     return;
@@ -1141,6 +1125,23 @@ const user = userData.user;
     </div>
       </div>`;
  }
+  async function loadAdminData() {
+  const adminList = document.getElementById("adminList");
+
+  const { data, error } = await supabaseClient
+    .from("daily_checkins")
+    .select("user_id, checkin_date, vegetais, movimento, relacoes")
+    .order("checkin_date", { ascending: false });
+
+  if (error) {
+    console.error("Erro ao carregar dados do admin:", error);
+    adminList.innerHTML = "<p>Não foi possível carregar os dados.</p>";
+    return;
+  }
+
+  console.log("Dados do painel admin:", data);
+  adminList.innerHTML = `<p>${data.length} check-ins encontrados.</p>`;
+}
   async function loadTodayCheckin() {
       const { data: userData } = await supabaseClient.auth.getUser();
   const user = userData.user;
