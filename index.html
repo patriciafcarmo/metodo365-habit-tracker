@@ -1076,6 +1076,7 @@ const user = userData.user;
   }
 
   console.log("Dados do painel admin:", data);
+     adminList.innerHTML = `<p>${data.length} check-ins encontrados.</p>`;
 }
      if (!data || data.length === 0) {
     historyList.innerHTML = "<p>Você ainda não tem nenhum dia registrado. 🌱</p>";
