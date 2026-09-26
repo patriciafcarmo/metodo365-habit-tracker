@@ -760,6 +760,17 @@ display: block;
   <main class="phone-app" id="adminScreen" style="display: none;">
   <header>
     <div class="brand">MÉTODO 365 🌱</div>
+    <div class="motto">Pequenas escolhas, grandes mudanças.</div>
+  </header>
+
+  <section>
+    <h2>Painel Admin</h2>
+    <p>Acompanhamento das participantes</p>
+  </section>
+</main>
+  <main class="phone-app" id="adminScreen" style="display: none;">
+  <header>
+    <div class="brand">MÉTODO 365 🌱</div>
     <div class="motto">Área da nutricionista</div>
     <button type="button" class="logout-button" onclick="logout()">Sair</button>
   </header>
@@ -809,6 +820,8 @@ display: block;
                                 if (!data.session) {
   document.getElementById("loginScreen").style.display = "flex";
                                   document.getElementById("appScreen").style.display = "none";
+                                  document.getElementById("historyScreen").style.display = "none";
+                                  document.getElementById("adminScreen").style.display = "block";
 }
                                  else{
                                    document.getElementById("loginScreen").style.display = "none";
@@ -982,7 +995,7 @@ const backToLoginButton = document.getElementById("backToLoginButton");
  const historyButton = document.getElementById("historyButton");
   const adminButton = document.getElementById("adminButton");
   adminButton.addEventListener("click", () => {
-  alert("Área administrativa 🌱");
+  document.getElementById("appScreen").style.display = "none";
 });
 const todayButton = document.getElementById("todayButton");
   historyButton.addEventListener("click", () => {
