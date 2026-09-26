@@ -724,6 +724,10 @@ display: block;
         <div class="nav-icon">▥</div>
         <div>Meu histórico</div>
       </div>
+      <div class="nav-item" id="adminButton" style="display: none;">
+  <div class="nav-icon">⚙️</div>
+  <div>Admin</div>
+</div>
     </nav>
 
   </main>
@@ -752,6 +756,22 @@ display: block;
       <span>Meu histórico</span>
     </div>
   </nav>
+</main>
+  <main class="phone-app" id="adminScreen" style="display: none;">
+  <header>
+    <div class="brand">MÉTODO 365 🌱</div>
+    <div class="motto">Área da nutricionista</div>
+    <button type="button" class="logout-button" onclick="logout()">Sair</button>
+  </header>
+
+  <section class="intro">
+    <h1>Painel do Método 365</h1>
+    <p>Acompanhe os registros das participantes.</p>
+  </section>
+
+  <section id="adminContent">
+    <p>Carregando participantes...</p>
+  </section>
 </main>
   <script>
     const dateElement = document.getElementById("todayDate");
@@ -795,6 +815,9 @@ display: block;
                                    document.getElementById("appScreen").style.display = "block";
                                    const isAdmin = await checkIfAdmin(data.session.user.id);
 console.log("É administradora?", isAdmin);
+                                   if (isAdmin) {
+  document.getElementById("adminButton").style.display = "block";
+}
                                 }
                                  loadTodayAnswers();
                                 }
@@ -957,6 +980,10 @@ const backToLoginButton = document.getElementById("backToLoginButton");
   location.reload();
 }
  const historyButton = document.getElementById("historyButton");
+  const adminButton = document.getElementById("adminButton");
+  adminButton.addEventListener("click", () => {
+  alert("Área administrativa 🌱");
+});
 const todayButton = document.getElementById("todayButton");
   historyButton.addEventListener("click", () => {
   document.getElementById("appScreen").style.display = "none";
