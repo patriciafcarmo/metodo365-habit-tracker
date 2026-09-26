@@ -1045,11 +1045,14 @@ const todayButton = document.getElementById("todayButton");
   }
     }
  async function loadHistory() {
+   const { data: userData } = await supabaseClient.auth.getUser();
+const user = userData.user;
      const historyList = document.getElementById("historyList");
   historyList.innerHTML = "<p>Carregando seu histórico...</p>";
      const { data, error } = await supabaseClient
     .from("daily_checkins")
     .select("checkin_date, vegetais, movimento, relacoes")
+       .eq("user_id", user.id)
     .order("checkin_date", { ascending: false });
      if (error) {
     historyList.innerHTML = "<p>Não foi possível carregar seu histórico.</p>";
